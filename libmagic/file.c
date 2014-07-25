@@ -126,7 +126,7 @@ private void help(void);
 int main(int, char *[]);
 
 private int unwrap(struct magic_set *, const char *);
-private int process(struct magic_set *ms, const char *, int);
+private int process(struct magic_set *ms, const char *, size_t);
 private struct magic_set *load(const char *, int);
 
 
@@ -372,7 +372,7 @@ unwrap(struct magic_set *ms, const char *fn)
 	ssize_t len;
 	char *line = NULL;
 	size_t llen = 0;
-	int wid = 0, cwid;
+	size_t wid = 0, cwid;
 	int e = 0;
 
 	if (strcmp("-", fn) == 0) {
@@ -413,7 +413,7 @@ unwrap(struct magic_set *ms, const char *fn)
  * Called for each input file on the command line (or in a list of files)
  */
 private int
-process(struct magic_set *ms, const char *inname, int wid)
+process(struct magic_set *ms, const char *inname, size_t wid)
 {
 	const char *type;
 	int std_in = strcmp(inname, "-") == 0;

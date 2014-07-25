@@ -521,7 +521,7 @@ static int dispatch(xprintf_struct *s)
       int * p;
       p = va_arg(s->vargs, int *);
       if (p != NULL) {
-        *p = s->pseudo_len;
+        *p = (int)s->pseudo_len;
         return 0;
       }
       return EOF;
@@ -605,7 +605,7 @@ static int core(xprintf_struct *s)
   s->buffer_base = (char *)realloc((void *)(s->buffer_base), save_len + 1);
   if (s->buffer_base == NULL)
     return EOF; /* should rarely happen because we shrink the buffer */
-  return s->pseudo_len;
+  return (int)s->pseudo_len;
 
  free_EOF:
   free(s->buffer_base);
